@@ -1,0 +1,52 @@
+{% extends 'dashboard/main.html' %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="{% url 'tasks' %}">All Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="{% url 'tasks_completed' %}">Completed Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="{% url 'tasks_incompleted' %}">Incompleted Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white bg-primary" href="{% url 'task-create' %}" tabindex="-1" aria-disabled="true">Add Assignment</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+              <th>Assignment</th>
+    					<th>Name</th>
+    					<th>Email</th>
+              <th><center></center></th>
+						</tr>
+            {% for task in tasks %}
+              <tr>
+                <td><small>{{task.title}}</small></td>
+                <td><small>{{task.customer.name}}</small></td>
+                <td><small>{{task.customer.email}}</small></td>
+                <td><small>{{task.status}}</small></td>
+                <td>
+                  <center><div class="btn-group btn-group-sm">
+                    <a href="{% url 'task-edit' task.id %}" class="btn btn-light">Edit</a>
+                    <a href="{% url 'task-delete' task.id %}" class="btn btn-light">Delete</a>
+                  </div></center>
+                </td>
+              </tr>
+            {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

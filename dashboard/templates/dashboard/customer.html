@@ -1,0 +1,79 @@
+{% extends 'dashboard/main.html' %}
+
+{% block content %}
+<div class="card-group">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Customer info:</h5>
+      <p class="card-text"><small>Name: {{customer.name}}</small></p>
+      <p class="card-text"><small>Email: {{customer.email}}</small></p>
+      <p class="card-text"><small>Platform: {{customer.platform}}</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Subscription info:</h5>
+      <p class="card-text"><small>Subscription ID: {{customer.id}}</small></p>
+      <p class="card-text"><small>Subscription date: {{customer.date}}</small></p>
+      <p class="card-text"><small>Plan: {{customer.subscription}}</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary text-dark bg-white" type="button">Assignments</button>
+          <button class="btn btn-warning text-dark bg-white" type="button">Update</button>
+          <button class="btn btn-danger text-dark bg-white" type="button">Delete</button>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active aria-current" href="" tabindex="-1" aria-disabled="true">All Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="">Answered Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="">Missed Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white bg-primary" href="#" tabindex="-1" aria-disabled="true">Add Call</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+              <th>Phone number</th>
+    					<th>Date</th>
+              <th>Status</th>
+              <th>Comment</th>
+              <th><center>Edit</center></th>
+              <th><center>Delete</center></th>
+						</tr>
+            {% for call in calls %}
+              {% if customer.id == call.customer.id %}
+                <tr>
+                  <td><small>{{call.number}}</small></td>
+                  <td><small>{{call.date}}</small></td>
+                  <td><small>{{call.status}}</small></td>
+                  <td><small>{{call.comment}}</small></td>
+                  <td><center><a class="btn btn-warning btn-sm text-dark bg-white" href="">Edit</center></td>
+                  <td><center><a class="btn btn-danger btn-sm text-dark bg-white" href="">Delete</a></center></td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

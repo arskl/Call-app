@@ -1,0 +1,57 @@
+{% extends 'dashboard/main.html' %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="{% url 'calls' %}">All Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="{% url 'calls_answered' %}">Answered Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="{% url 'calls_missed' %}">Missed Calls</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white bg-primary" href="{% url 'call-create' %}">Add Call</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+              <th>Phone number</th>
+    					<th>Date</th>
+              <th>Status</th>
+    					<th>Name</th>
+              <th>Comment</th>
+              <th><center></center></th>
+						</tr>
+            {% for call in calls %}
+              <tr>
+                <td><small>{{call.number}}</small></td>
+                <td><small>{{call.date}}</small></td>
+                <td><small>{{call.status}}</small></td>
+                <td><small>{{call.customer.name}}</small></td>
+                <td><small>{{call.customer.email}}</small></td>
+                <td><small>{{call.comment}}</small></td>
+                <td>
+                  <center><div class="btn-group btn-group-sm">
+                    <a href="{% url 'customer' call.customer.id %}" class="btn btn-light">Profile</a>
+                    <a href="{% url 'call-edit' call.id %}" class="btn btn-light">Edit</a>
+                    <a href="{% url 'call-delete' call.id %}" class="btn btn-light">Delete</a>
+                  </div></center>
+                </td>
+              </tr>
+            {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

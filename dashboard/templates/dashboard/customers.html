@@ -1,0 +1,47 @@
+{% extends 'dashboard/main.html' %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link text-white bg-primary" href="" tabindex="-1" aria-disabled="true">Add Customer</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+              <th>Name</th>
+              <th>Email</th>
+    					<th>Platform</th>
+              <th>Subscription Type</th>
+              <th>Subscription Date</th>
+              <th>Comment</th>
+              <th><center>Profile</center></th>
+              <th><center>Edit</center></th>
+              <th><center>Delete</center></th>
+						</tr>
+            {% for customer in customers %}
+              <tr>
+                <td><small>{{customer.name}}</small></td>
+                <td><small>{{customer.email}}</small></td>
+                <td><small>{{customer.platform}}</small></td>
+                <td><small>{{customer.subscription}}</small></td>
+                <td><small>{{customer.date}}</small></td>
+                <td><small>{{customer.comment}}</small></td>
+                <td><small><center><a class="btn btn-info btn-sm bg-white text-dark" href="">Profile</a></center></small></td>
+                <td><small><center><a class="btn btn-warning btn-sm" href="">Edit</center></small></td>
+                <td><small><center><a class="btn btn-danger btn-sm" href="">Delete</a></center></small></td>
+              </tr>
+            {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
